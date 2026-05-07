@@ -1,94 +1,84 @@
 # Fase 4 — Arquitectura de Estructuras Binarias
-**Autor:** Santiago Villa | **Curso:** Estructuras de Datos — UNAD | **Semestre:** Quinto | **Año:** 2026
+
+**Autor:** Santiago Villa
+**Curso:** Estructuras de Datos — UNAD
+**Semestre:** Quinto
+**Año:** 2026
 
 ---
 
-## Descripción del Proyecto
+## 📌 Descripción del Proyecto
 
-Aplicación de escritorio desarrollada en **Python 3.10+** con interfaz gráfica **Tkinter** que implementa un **Árbol Binario de Búsqueda (ABB)** interactivo. El sistema permite insertar, eliminar, buscar y recorrer nodos con representación visual dinámica, aplicando principios de **Programación Orientada a Objetos**.
+Esta es una aplicación de escritorio desarrollada en **Python 3.10+** con interfaz gráfica **Tkinter** que implementa un **Árbol Binario de Búsqueda (ABB)** de forma interactiva y visual. El sistema permite al usuario insertar, buscar y eliminar nodos (números enteros), mientras el árbol se dibuja dinámicamente en pantalla, soportando hasta un máximo de 4 niveles de profundidad.
 
-**RAC 3:** *Aplicar los fundamentos de la teoría general de árboles binarios como estructuras jerárquicas de datos, a través del diseño de interfaces gráficas de árboles binarios codificados en un lenguaje de programación orientado a objetos, para la solución de problemas de aplicación.*
+Adicionalmente, el proyecto ejecuta y grafica en tiempo real los recorridos estándar de árboles binarios:
+*   **Preorden** (Raíz → Izquierda → Derecha)
+*   **Inorden** (Izquierda → Raíz → Derecha)
+*   **Posorden** (Izquierda → Derecha → Raíz)
+
+Este proyecto da cumplimiento al resultado de aprendizaje de aplicar los fundamentos de la teoría general de árboles binarios mediante interfaces gráficas y Programación Orientada a Objetos.
 
 ---
 
-## Estructura del Proyecto
+## 🏗 Arquitectura del Sistema
 
-```
+La aplicación está diseñada siguiendo estrictamente el paradigma de **Programación Orientada a Objetos (POO)** y un patrón arquitectónico derivado de **MVC (Modelo-Vista-Controlador)** para asegurar una alta cohesión y bajo acoplamiento:
+
+*   **Modelo (`src/models/`):**
+    *   `nodo.py`: Define la estructura básica de datos (el nodo) con un valor numérico y punteros a sus hijos izquierdo y derecho.
+    *   `arbol_binario.py`: Contiene toda la lógica de negocio y reglas del Árbol Binario de Búsqueda (validaciones de nivel máximo, inserción recursiva, algoritmos de recorrido, y prevención de duplicados).
+*   **Vista (`src/views/`):**
+    *   `login_window.py`: Gestiona la interfaz de acceso inicial, validando la contraseña genérica.
+    *   `main_window.py`: Contiene la interfaz gráfica principal utilizando lienzos (`Canvas`) de Tkinter para dibujar la representación del árbol y sus secuencias de recorrido.
+*   **Controlador (`src/controllers/`):**
+    *   `controlador.py`: Actúa como intermediario. Recibe los inputs del usuario desde la vista, maneja las excepciones, delega las acciones al modelo y devuelve respuestas formateadas para que la vista actualice la pantalla.
+
+**Estructura de Directorios:**
+```text
 arquitectura_de_estructuras_binarias/
-│
-├── docs/                                   # Documentación de planificación
-│   ├── vision_alcance/
-│   │   └── 01_vision_y_alcance.md          # Documento de Visión y Alcance (Wiegers 2013)
-│   ├── requerimientos_usuario/
-│   │   └── 02_requerimientos_usuario.md    # Historias de Usuario con criterios de aceptación
-│   └── especificacion_requerimientos/
-│       └── 03_especificacion_requerimientos.md  # SRS: RF detallados, QA, restricciones, interfaces
-│
-├── src/                                    # Código fuente de la aplicación
-│   ├── models/
-│   │   ├── nodo.py                         # Clase Nodo (valor, izquierdo, derecho)
-│   │   └── arbol_binario.py               # Clase ArbolBinarioBusqueda (lógica del ABB)
-│   ├── views/
-│   │   ├── ventana_principal.py            # Clase VentanaPrincipal (layout Tkinter)
-│   │   └── canvas_arbol.py                # Clase CanvasArbol (renderizado gráfico)
+├── src/
+│   ├── main.py
 │   ├── controllers/
-│   │   └── controlador.py                 # Clase Controlador (mediador Vista-Modelo)
-│   └── main.py                            # Punto de entrada de la aplicación
-│
-├── tests/                                  # Pruebas unitarias
-│   └── test_arbol_binario.py              # Tests de inserción, eliminación, recorridos
-│
-└── README.md                              # Este archivo
+│   │   └── controlador.py
+│   ├── models/
+│   │   ├── arbol_binario.py
+│   │   └── nodo.py
+│   └── views/
+│       ├── login_window.py
+│       └── main_window.py
+└── README.md
 ```
 
 ---
 
-## Documentos de Planificación
+## 🚀 Requisitos del Sistema
 
-| # | Documento | Descripción |
-|---|-----------|-------------|
-| 1 | [Visión y Alcance](docs/vision_alcance/01_vision_y_alcance.md) | Requerimientos de negocio, visión de la solución, alcance y contexto |
-| 2 | [Requerimientos de Usuario](docs/requerimientos_usuario/02_requerimientos_usuario.md) | Historias de usuario (primarias y secundarias) con criterios de aceptación |
-| 3 | [Especificación de Requerimientos (SRS)](docs/especificacion_requerimientos/03_especificacion_requerimientos.md) | RF detallados, atributos de calidad (escenarios), restricciones, interfaces externas |
+- **Lenguaje:** Python 3.10 o superior.
+- **Librería gráfica:** Tkinter (Incluida por defecto en la instalación estándar de Python en Windows/macOS. En distribuciones Linux basadas en Debian/Ubuntu puede requerir ejecutar `sudo apt install python3-tk`).
+- No requiere dependencias externas vía `pip`.
 
 ---
 
-## Requisitos del Sistema
+## 💻 Cómo Ejecutar la Aplicación
 
-- Python 3.10 o superior
-- Tkinter (incluido en Python estándar; en Linux instalar con `sudo apt install python3-tk`)
-- Sin dependencias externas adicionales
+Sigue estos pasos para iniciar la aplicación localmente:
 
----
-
-## Cómo Ejecutar
-
-```bash
-# 1. Clonar o descomprimir el proyecto
-# 2. Verificar Python y Tkinter
-python3 --version
-python3 -c "import tkinter; print('Tkinter OK')"
-
-# 3. Ejecutar la aplicación
-cd src
-python3 main.py
-```
-
----
-
-## Entrega Académica
-
-El documento de entrega se llama **`Fase4SantiagoVilla`** y contiene:
-
-| Página | Contenido | Idioma |
-|--------|-----------|--------|
-| 1 | Portada con normas APA | Español |
-| 2 | Introducción | **Inglés** |
-| 3 | Objetivos | **Inglés** |
-| 4 | Enlace al archivo .zip con el código completo (público) | — |
-| 5 | Conclusiones | **Inglés** |
-| 6 | Referencias bibliográficas | APA |
+1.  **Clona este repositorio** o descarga y descomprime el archivo `.zip`.
+2.  Abre una terminal y **navega hasta el directorio del proyecto**:
+    ```bash
+    cd ruta/hasta/arquitectura_de_estructuras_binarias
+    ```
+3.  **Ingresa a la carpeta del código fuente:**
+    ```bash
+    cd src
+    ```
+4.  **Ejecuta el archivo principal:**
+    ```bash
+    python3 main.py
+    ```
+    *(Nota: Dependiendo de tu sistema operativo, el comando puede ser simplemente `python main.py`)*
+5.  **Credenciales de acceso:** Al abrirse la ventana inicial, ingresa la contraseña genérica para acceder a la aplicación:
+    *   **Contraseña:** `ARBOL`
 
 ---
-
-*Proyecto académico — UNAD, Estructuras de Datos, Quinto Semestre, 2026.*
+*Proyecto académico — UNAD, Ingeniería de Sistemas.*
